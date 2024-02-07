@@ -15,17 +15,30 @@ use both size (radius) and color to indicate statistics about each campus.
 
 Your assignment is as follows:
 
-1. Download the two .csv files in this repository.  One is a database of latitude and longitude locations of each campus, while the other is a table with more than 48000 rows that counts students in broken down by various categories, including location.  Here are the two full URLs for the files:
+1. Download the two .csv files in this repository using the `read_table` method in Section 8.5. (You should try to mimic the code that creates the `trips` object in that Jupyter notebook, but make changes to the name of the object and the filenames to suit the purpose of this lab). Here are the two full URLs for the files:
    
 ```
 https://raw.githubusercontent.com/DS200-SP2024-Hunter/Week05-DueFeb14/main/PSUCampusLocations.csv
 https://raw.githubusercontent.com/DS200-SP2024-Hunter/Week05-DueFeb14/main/PSUDemographicDataFA2023.csv
 ```
 
+One of these files is a database of latitude and longitude locations of each campus, while the other is a table with more than 48000 rows that counts students in broken down by various categories, including location. You should give the Table objects you create sensible names.
+
+
 **NEED TO EDIT BELOW THIS LINE**
 
+2. Create a map using only the smaller Table. To do this, first relabel the columns in this table using the `relabel` method so that their names are `lat`, `long`, and `labels`.  For instance, if your Table is called `LocationTable`, then you would use the following code to do the relabeling:
 
-2. Make sure you can reproduce, more or less, the four maps in Section 8.5.  This will require changing the code.  Below are four code boxes that can replace existing code.  The first imports the 'folium' module, which is needed.  After getting the code to run after you copy-paste what's below, I encourage you to experiment by changing some of the code to see what happens.  If you'd like to learn more about folium, check out https://python-visualization.github.io/folium/modules.html.
+```
+LocationTable.relabel('Lat', 'lat')
+LocationTable.relabel('Long', 'long')
+LocationTable.relabel('Campus', 'labels')
+```
+   
+3. Use the `join` method to create a new Table object in which each row contains both the student information and the latitude/longitude positions of their campuses.
+
+2.
+3. Make sure you can reproduce, more or less, the four maps in Section 8.5.  This will require changing the code.  Below are four code boxes that can replace existing code.  The first imports the 'folium' module, which is needed.  After getting the code to run after you copy-paste what's below, I encourage you to experiment by changing some of the code to see what happens.  If you'd like to learn more about folium, check out https://python-visualization.github.io/folium/modules.html.
 ```
 import folium # This line is needed to use the folium library capabilities below
 
