@@ -16,15 +16,15 @@ use both size (radius) and color to indicate statistics about each campus.
 Your assignment is as follows:
 
 1. Download the two .csv files in this repository.  One is a database of latitude and longitude locations of each campus, while the other is a table with more than 48000 rows that counts students in broken down by various categories, including location.  Here are the two full URLs for the files:
+   
+```
+https://raw.githubusercontent.com/DS200-SP2024-Hunter/Week05-DueFeb14/main/PSUCampusLocations.csv
+https://raw.githubusercontent.com/DS200-SP2024-Hunter/Week05-DueFeb14/main/PSUDemographicDataFA2023.csv
+```
 
 **NEED TO EDIT BELOW THIS LINE**
 
-   
-```
-PSUDemographicDataFA2023.csv
-http://personal.psu.edu/drh20/200DS/assets/data/trip.csv
-http://personal.psu.edu/drh20/200DS/assets/data/station.csv
-```
+
 2. Make sure you can reproduce, more or less, the four maps in Section 8.5.  This will require changing the code.  Below are four code boxes that can replace existing code.  The first imports the 'folium' module, which is needed.  After getting the code to run after you copy-paste what's below, I encourage you to experiment by changing some of the code to see what happens.  If you'd like to learn more about folium, check out https://python-visualization.github.io/folium/modules.html.
 ```
 import folium # This line is needed to use the folium library capabilities below
