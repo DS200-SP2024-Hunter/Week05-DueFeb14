@@ -8,15 +8,18 @@ The main objective of today's lab is to produce a map of Penn State University's
 
 When you turn in your work, it should not contain any irrelevant text and code boxes from the textbook Jupyter notebooks. Please delete text and code boxes unrelated to the assignment before you upload your lab.
 
-**NEED TO EDIT BELOW THIS LINE**
 
-This assignment uses the 'join' method extensively, which is the topic of [Section 8.4](https://inferentialthinking.com/chapters/08/4/Joining_Tables_by_Columns.html).  I recommend that you work through Section 8.4 and make sure you understand its logic before moving on to the tasks below.
-
-**Objective**:  Produce a map of the Bay Area in which the number of bike rentals starting at each station is represented by a colored circle whose area is proportional to the number of rentals and whose color represents the city where the station is located.  The map will look almost like the final map in Section 8.5 except with colors chosen as in the five-color map earlier in the section.
+**Objective**:  Produce two maps of Pennsylvania on which you plot the location of each campus using circles,
+as in [Section 8.5](https://inferentialthinking.com/chapters/08/5/Bike_Sharing_in_the_Bay_Area.html), where you can
+use both size (radius) and color to indicate statistics about each campus.
 
 Your assignment is as follows:
 
-1. Reconstruct the 'trips' and 'stations' objects from Section 8.5 by downloading the .csv files at these two URLs (one way to do this is to replace the `path_data` object by `'http://personal.psu.edu/drh20/200DS/assets/data/'`): 
+1. Download the two .csv files in this repository.  One is a database of latitude and longitude locations of each campus, while the other is a table with more than 48000 rows that counts students in broken down by various categories, including location.  Here are the two full URLs for the files:
+
+**NEED TO EDIT BELOW THIS LINE**
+
+   
 ```
 http://personal.psu.edu/drh20/200DS/assets/data/trip.csv
 http://personal.psu.edu/drh20/200DS/assets/data/station.csv
