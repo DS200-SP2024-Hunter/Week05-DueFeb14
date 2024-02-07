@@ -50,7 +50,7 @@ GroupedByCampus = MyTableObjectName.group('Location')
 GroupedByCampus.show()
 ```
 
-5. Create a new map using circles where the radius of each circle is controled by the `count` column in your grouped object.  See Section 8.5 for guidance on how this works. If you wish, add colors.
+5. Create a new map using circles where the radius of each circle is controled by the `count` column in your grouped object.  See Section 8.5 for examples of how this works. Remember that you should `select` only the correct columns and make sure they are selected in the right order and then `relabel`ed if necessary to match the code in Section 8.5. Feel free to try adding different colors if you want.  **This is the most challenging step because you will need to adapt code from Section 8.5.  If you are comfortable with this step, try challenging yourself with steps 6 or 7, which are not required.**
 
 6. [Optional for an extra point:] Group according to location as well as some other column of interest to you. Compute some interesting new statistic for each campus, then produce a new map that somehow conveys this information.
 
