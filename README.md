@@ -9,9 +9,7 @@ The main objective of today's lab is to produce a map of Penn State University's
 When you turn in your work, it should not contain any irrelevant text and code boxes from the textbook Jupyter notebooks. Please delete text and code boxes unrelated to the assignment before you upload your lab.
 
 
-**Objective**:  Produce two maps of Pennsylvania on which you plot the location of each campus using circles,
-as in [Section 8.5](https://inferentialthinking.com/chapters/08/5/Bike_Sharing_in_the_Bay_Area.html), where you can
-use both size (radius) and color to indicate statistics about each campus.
+**Objective**:  Produce two maps of Pennsylvania on which you plot the location of each campus using pins or circles, as in [Section 8.5](https://inferentialthinking.com/chapters/08/5/Bike_Sharing_in_the_Bay_Area.html), where you can use size (radius) and/or color to indicate statistics about each campus.
 
 Your assignment is as follows:
 
@@ -34,89 +32,29 @@ LocationTable.relabel('Lat', 'lat')
 LocationTable.relabel('Long', 'long')
 LocationTable.relabel('Campus', 'labels')
 ```
-   
-3. Use the `join` method to create a new Table object in which each row contains both the student information and the latitude/longitude positions of their campuses.
 
-2.
-3. Make sure you can reproduce, more or less, the four maps in Section 8.5.  This will require changing the code.  Below are four code boxes that can replace existing code.  The first imports the 'folium' module, which is needed.  After getting the code to run after you copy-paste what's below, I encourage you to experiment by changing some of the code to see what happens.  If you'd like to learn more about folium, check out https://python-visualization.github.io/folium/modules.html.
+It turns out that the `Marker.map_table` method requires a table with columns in exactly the correct ordering (`lat` then `long` then `labels`), so you can perform this reordering using
 ```
-import folium # This line is needed to use the folium library capabilities below
-
-# OLD CODE (uses map_table in datascience module, no longer works correctly)
-#Marker.map_table(stations.select('lat', 'long', 'name'))
-
-# NEW CODE using folium module directly:
-BayAreaMap = folium.Map(location=[37.34, -121.9], tiles="OpenStreetMap", zoom_start=8, width='50%', height='50%')
-for i in np.arange(stations.num_rows):
-  latitude = stations.column('lat')[i]
-  longitude = stations.column('long')[i]
-  LatLonLocation = [latitude, longitude]
-  label = stations.column('name')[i]
-  folium.Marker(LatLonLocation, popup=label).add_to(BayAreaMap)
-BayAreaMap
+LocationTable = LocationTable.select('lat','long','labels')
 ```
+(Remember, all of the above code supposes that you've named your smaller object `LocationTable`.  You should change the code to match your own object's name.) Once the Table has only three columns, in the correct order with the correct labels, you can simply use this code that is taken from Section 8.5:
 ```
-sf = stations.where('landmark', are.equal_to('San Francisco'))
+Marker.map_table(LocationTable)
+```   
+3. Use the `join` method to create a new (very large!) Table object in which each row contains both the student information and the latitude/longitude positions of their campuses. Make sure you include the code that performs this step in your work that you turn in.  Also, use the `labels` method (as in `MyTableObjectName.labels`) to disply the names of your new, joined Table object.
 
-# OLD CODE (uses map_table in datascience library, no longer works correctly)
-#sf_map_data = sf.select('lat', 'long', 'name')
-#Circle.map_table(sf_map_data, color='green', radius=200)
+4. Group the rows in your large Table object according to the campus location using `MyTableObjectName.group('Location')`.  Give this grouped object a name, then print it out in its entirety using the `show()` method, as in:
 
-# NEW CODE using folium module directly:
-SFMap = folium.Map(location=[37.8, -122.4], tiles="OpenStreetMap", zoom_start=13, width='50%', height='50%')
-for i in np.arange(sf.num_rows):
-  folium.Circle([sf.column('lat')[i], sf.column('long')[i]], popup=sf.column('name')[i], color='green', radius=200).add_to(SFMap)
-SFMap
 ```
-```
-joined = stations.join('landmark', colors, 'city')
-colored = joined.select('lat', 'long', 'name', 'color').relabel('name', 'labels')
-
-# OLD CODE (uses map_table in datascience module, no longer works correctly)
-#Marker.map_table(colored)
-
-# NEW CODE using folium module directly:
-BayAreaMap2 = folium.Map(location=[37.4, -121.9], tiles="OpenStreetMap", zoom_start=9, width='80%', height='80%')
-for i in np.arange(colored.num_rows):
-  latitude = colored.column('lat')[i]
-  longitude = colored.column('long')[i]
-  LatLonLocation = [latitude, longitude]
-  label = colored.column('labels')[i]
-  color = colored.column('color')[i]
-  folium.Marker(LatLonLocation, popup=label, icon=folium.Icon(color=color)).add_to(BayAreaMap2)
-BayAreaMap2
-```
-```
-starts_map_data = station_starts.select('lat', 'long', 'name').with_columns(
-    'colors', 'blue',
-# OLD CODE:    'areas', station_starts.column('count') * 0.3 
-    'radius', np.sqrt(station_starts.column('count') * 2000) # Need radius instead of area
-)
-starts_map_data.show(3)
-
-# OLD CODE (uses map_table in datascience module, no longer works correctly)
-#Circle.map_table(starts_map_data.relabel('name', 'labels'))
-
-# NEW CODE using folium module directly:
-SFMap2 = folium.Map(location=[37.4, -121.9], tiles="OpenStreetMap", zoom_start=9, width='80%', height='80%')
-for i in np.arange(starts_map_data.num_rows):
-  folium.Circle([starts_map_data.column('lat')[i], starts_map_data.column('long')[i]], 
-                popup=starts_map_data.column('name')[i], color='blue', opacity=0.4,
-                radius=starts_map_data.column('radius')[i]).add_to(SFMap2)
-SFMap2
+GroupedByCampus = MyTableObjectName.group('Location')
+GroupedByCampus.show()
 ```
 
-3. Create a new version of the table called 'starts_map_data' that is just like the one in Section 8.5 except that the colors should match the station colors from the 'colored' table created earlier in that section.  That is, Mountain View stations should be blue, Palo Alto stations red, and so on. 
-**Hint**:  A starting point is to use the `join` method on the `starts` and `colored` tables already created, as in
-```
-starts.join("Start Station", colored, "labels")
-```
+5. Create a new map using circles where the radius of each circle is controled by the `count` column in your grouped object.  See Section 8.5 for guidance on how this works. If you wish, add colors.
 
-4. In your output, turn in the code that creates your new version of the 'starts_map_data' table as well as printing out the entire object.  (Remember, you can use the `show` method with no argument to print the whole object.)
+6. [Optional for an extra point:] Group according to location as well as some other column of interest to you. Compute some interesting new statistic for each campus, then produce a new map that somehow conveys this information.
 
-5. Finally, reproduce the final map in Section 8.5 using the different colors for each city's stations.  Feel free to play around with the look of the circles and map.
-
-6. To summarize:  What you turn in should include (only) the full Table object from step 3 and the modified final map from step 5, along with the code boxes that produce them.  Remember that when you produce your pdf file to turn in, the map will no longer be interactive; therefore, you should position and zoom the map in the most appealing and informative way you can before you print to pdf.
+7. [Optional for an extra point:] Take the `Enrollment Count` information into account. The information in step 5 is not quite giving total enrollments because each row in the table represents one OR MORE students.  Figure out a way to incorporate these counts so that you are correctly plotting actual enrollment numbers.
 
 When you've completed this, you should select "Print" from the File menu, then somehow save to pdf using this option.  The pdf file that you create in this way is the file that you should upload to Canvas for grading.  Recall that sometimes the right side of the notebooks are chopped off by this print procedure, but we have found that if you can select the "A3" paper size from the advanced options, this seems to solve the problem.
 
