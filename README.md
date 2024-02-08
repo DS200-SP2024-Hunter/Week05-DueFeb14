@@ -11,6 +11,8 @@ When you turn in your work, it should not contain any irrelevant text and code b
 
 **Objective**:  Produce two maps of Pennsylvania on which you plot the location of each campus using pins or circles, as in [Section 8.5](https://inferentialthinking.com/chapters/08/5/Bike_Sharing_in_the_Bay_Area.html), where you can use size (radius) and/or color to indicate statistics about each campus.
 
+_The large dataset in this assignment was downloaded from the [website of Penn State's Office of Planning, Assessment, and Institutional Research](https://datadigest.psu.edu/student-enrollment/)_
+
 Your assignment is as follows:
 
 1. Download the two .csv files in this repository using the `read_table` method in Section 8.5. (You should try to mimic the code that creates the `trips` object in that Jupyter notebook, but make changes to the name of the object and the filenames to suit the purpose of this lab). Here are the two full URLs for the files:
@@ -21,9 +23,6 @@ https://raw.githubusercontent.com/DS200-SP2024-Hunter/Week05-DueFeb14/main/PSUDe
 ```
 
 One of these files is a database of latitude and longitude locations of each campus, while the other is a table with more than 48000 rows that counts students in broken down by various categories, including location. You should give the Table objects you create sensible names.
-
-
-**NEED TO EDIT BELOW THIS LINE**
 
 2. Create a map using only the smaller Table. To do this, first relabel the columns in this table using the `relabel` method so that their names are `lat`, `long`, and `labels`.  For instance, if your Table is called `LocationTable`, then you would use the following code to do the relabeling:
 
