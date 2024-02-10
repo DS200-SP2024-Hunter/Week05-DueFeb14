@@ -8,6 +8,7 @@ The main objective of today's lab is to produce a map of Penn State University's
 
 When you turn in your work, it should not contain any irrelevant text and code boxes from the textbook Jupyter notebooks. Please delete text and code boxes unrelated to the assignment before you upload your lab.
 
+A supplementary jupyter notebook for this lab is [here](https://github.com/DS200-SP2024-Hunter/Week05-DueFeb14/blob/main/Lab05SupplementaryNotebook.ipynb).
 
 **Objective**:  Produce two maps of Pennsylvania on which you plot the location of each campus using pins or circles, as in [Section 8.5](https://inferentialthinking.com/chapters/08/5/Bike_Sharing_in_the_Bay_Area.html), where you can use size (radius) and/or color to indicate statistics about each campus.
 
